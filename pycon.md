@@ -6,7 +6,7 @@ backgroundColor: #fff
 backgroundImage: url('https://marp.app/assets/hero-background.jpg')
 marp: true
 style: |
-    section.title * , h1{
+    section.title * {
         text-align: center;
     }
 ---
@@ -109,11 +109,14 @@ $ pip install discord.py[voice]
 これだけでBOT開発を始められます!
 
 (※別途discord botは作成する必要があります)
-()
+(url)
+
 ---
 ## 何ができる!?
-+ ユーザのアクションに応じて処理
-+ AOuth2認証
++ 
++ 
++ 
++ 
 
 
 ---
@@ -135,7 +138,7 @@ section {
 </style>
 
 # 最小限のコード
-以下が公式からサンプルで出されている最小限コードです
+公式からサンプルで出されている最小限コードです
 >https://discordpy.readthedocs.io/en/latest/quickstart.html
 
 
