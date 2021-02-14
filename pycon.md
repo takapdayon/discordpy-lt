@@ -39,6 +39,13 @@ style: |
   + discord.pyの中身をちらっと覗き見
 + まとめ
 
+---
+## LTで持って帰ってもらいたいもの
++ 開発すぐ始められるよ
+  + 余計な手続きがほとんどない
++ サーバ豪華になるよ
++ 世のbot(slackとか)と同じようにできるよ
+
 
 ---
 <!-- _class: title -->
@@ -62,7 +69,7 @@ style: |
 + etc...
 
 そして、なんとサーバ費は驚きのZERO!(ブーストはあります)
-そんなサーバ...
+そんなdiscordサーバ...
 
 ---
 <!-- _class: title -->
@@ -100,6 +107,26 @@ style: |
 discord APIをラップしてpythonから使えるようにしたライブラリ
 中でdiscordとの認証等ごにょってくれているためとてもありがたい
 
+
+---
+## 始め方
++ discord botを作成する
++ pipでdiscord.pyを入れる
+
+これだけです!
+
+---
+## discord botを作成する
+discord.pyで紹介されています
+(https://discordpy.readthedocs.io/en/latest/discord.html)
+
+見てわかる通り、やることは凄く少ないです
+
+![bg right:40% 90%](./assets/create.gif)
+
+---
+## pipでdiscord.pyを入れる
+
 ```sh
 $ pip install discord.py
 # 音声系を使う場合
@@ -107,27 +134,6 @@ $ pip install discord.py[voice]
 ```
 
 これだけでBOT開発を始められます!
-
-(※別途discord botは作成する必要があります)
-(url)
-
----
-## 何ができる!?
-+ 
-+ 
-+ 
-+ 
-
-
----
-## 作ってみた
-簡単なbotを早速作ってみました
-discordの状態を取得し、外部APIに連携するBOTです
-これがあれば、ホワイトボード当のstatusをdiscordから設定できます
-
-```
-コード
-```
 
 ---
 <!-- Scoped style -->
@@ -161,6 +167,32 @@ async def on_message(message):
 
 client.run('your token here')
 ```
+
+---
+## 動かす
+先ほどのコードを実行してみたいと思います
+```sh
+$ python Main.py
+We have logged in as test-slack
+```
+discord.py側の準備ができたらon_ready()が実行されるようになっており
+We have logged in as test-slackが表示されました
+
+---
+## 試す
+botを導入したdiscordサーバで$helloと打ってみましょう
+BotがHello!と返してくれれば成功です
+
+![100%](./assets/cap.png)
+
+うまくいきましたね！
+
+---
+## 何をトリガーにするか
+今回はチャットの入力をトリガーにしました(on_messageメソッド)
+何をトリガーにできるのかはdiscord.pyのAPIで紹介されています
+(https://discordpy.readthedocs.io/ja/latest/api.html)
+
 ---
 ### discord.pyの中身をちらっと覗き見
 最小限のコードでasync/awaitで定義している事からわかるように
@@ -228,11 +260,20 @@ def run(self, *args, **kwargs):
 
 ---
 ## まとめ
-+ 世に出回っているBOTは全部が全部安全ではない
++ 世に出回っているBOTは安全ではない場合もある
 + discord.pyを使えば簡単にAPIを扱える
-+ 録音の高レベルAPIがない!!!
-  + JS側はある
-  + 強い方commitを是非
++ bot開発は簡単！
+
+---
+
+<!-- _class: title -->
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## さぁ、あなたのサーバを一段階上の世界へ
 
 <!--
 
