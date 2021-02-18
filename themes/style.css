@@ -1,0 +1,8 @@
+/* @theme style */
+
+@import 'gaia';
+@import '~highlight.js/styles/dark';
+
+.hljs-meta {
+  color: #d69d85;
+}
