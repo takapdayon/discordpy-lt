@@ -11,13 +11,17 @@ style: |
   }
 ---
 
-<!--![bg left:40% 80%](https://marp.app/assets/marp.svg)-->
 # **Discord ヘビーユーザによる**
 ## **discord.py 解説**
 
 ---
 
 ## おまえ誰よ
+<!--
+まず、おまえだれよ、ということで
+・Discord歴は4年です(歴だけ長いとはいわせないけど歴だけ長いです)
+こちらの資料githubにあげますので、もしまたみたいよって方いましたらそちらから御願いします
+-->
 
 - 塚田 貴史
 - Discord 歴 4 年(2016 年から)
@@ -28,26 +32,40 @@ style: |
 
 ---
 
+<!-- _class: title -->
+<br>
+<br>
+<br>
+<br>
+<br>
+
 ## LT で持って帰ってもらいたいもの
 
-- bot の開発は簡単だよ!
-  - 余計な申請とかいらないよ!
-- bot を導入したサーバが豪華になるよ
-- 世の bot(slack とか)と同じように開発できるよ
+---
+<!--
+bot開発は簡単だよ!
+ってことだけを持ち帰っていただければと思います
+-->
+<!-- _class: title -->
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## :v:bot開発は簡単だよ!:v:
 
 ---
 
-## アジェンダ
+<!-- _class: title -->
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<!--TODO きれいにする-->
+## 突然ですが!
 
-- Discord について
-- discord.py
-  - 何ができる!?
-    - 最小限のコード紹介
-    - トリガー紹介
-  - discord.py の中身をちらっと覗き見
-- まとめ
 
 ---
 
@@ -65,13 +83,17 @@ style: |
 ![bg fit 50%](./assets/logo.svg)
 
 ---
-
+<!--
+少しだけdiscord紹介させてください
+ゲームの企業等がユーザにフィードバックをもらう場としても使われています
+-->
 ## Discord
 
 元々はゲーマー向けコミュニケーションツールとしてデビュー
 今では、大学・企業・ゲーム以外のコミュニティでも幅広く活躍!!!
 
 - Python.jp
+- discord.py
 - etc...
 
 そして、なんとサーバ費は驚きの ZERO!(ブーストはあります)
@@ -86,7 +108,7 @@ style: |
 <br>
 <br>
 
-## 豪華にしたくないですか?
+## 豪華に...したくないですか?
 
 ---
 
@@ -118,7 +140,10 @@ Discord API をラップして Python から使えるようにしたライブラ
 中で Discord との認証等ごにょってくれているためとてもありがたい
 
 ---
+<!--
+始め方は以下２つだけです
 
+-->
 ## 始め方
 
 - discord bot を作成する
@@ -127,13 +152,19 @@ Discord API をラップして Python から使えるようにしたライブラ
 これだけです!
 
 ---
+<!--
 
+-->
 ## 1: discord bot を作成する
 
 discord.py で紹介されています
 https://discordpy.readthedocs.io/en/latest/discord.html
 
 見てわかる通り、やることは凄く少ないです
+
+1. botの名前を決めて作成
+2. botの**トークン**を入手
+3. botをDiscordサーバに招待する
 
 ![bg right:40% 90%](./assets/create.gif)
 
@@ -152,16 +183,17 @@ $ pip install discord.py[voice]
 
 ---
 
-<!-- Scoped style -->
+
 <style scoped>
 section {
   font-size:25px;
 }
 </style>
 
-# 最小限のコード
-
-<!-- TODO ハイライトを見やすくする -->
+<!--
+後ほどざっくりコードは紹介しますのでここでは、一つだけ解説させてください
+-->
+# Hello World!
 
 公式からサンプルで出されている最小限コードです
 https://discordpy.readthedocs.io/en/latest/quickstart.html
@@ -187,26 +219,29 @@ client.run('Botトークン')
 ```
 
 ---
-<!-- Scoped style -->
 <style scoped>
 section {
   font-size:25px;
 }
-.highlighted-line {
-  background-color: #ff0;
-  display: block;
-  margin: 0 -16px;
-  padding: 0 16px;
+.hljs-comment {
+  color: #FF644E;
 }
 </style>
-# 最小限のコード
+
+<!--
+コメントアウトでこことなっている部分のif文なのですが
+ここで、チャットのメッセージの内容に$helloが含まれているかを判定し
+awaitで、対象のサーバに対してsendの中身を返しています
+ここでは'hello'を返していますね!
+-->
+# Hello World!
 
 <!-- TODO ハイライトを見やすくする -->
 
 公式からサンプルで出されている最小限コードです
 https://discordpy.readthedocs.io/en/latest/quickstart.html
 
-```python {15-16,18}
+```python
 import discord
 
 client = discord.Client()
@@ -220,14 +255,20 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    # ここ!
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
 
+# ここ!
 client.run('Botトークン')
 ```
 
 ---
-
+<!--
+では、実際に動かしてみましょう
+なんとpythonファイルを実行するのと同じように実行するだけで
+discord.py君がよしなにやってくれて動かしてくれます
+-->
 ## 動かしてみよう
 
 先ほどのコードを実行してみたいと思います
@@ -240,7 +281,12 @@ We have logged in as test-slack
 これだけで、discord.py 側で、よしなにしてくれます
 
 ---
-
+<!--
+では、先ほどのファイルを動かした後に
+botを導入したサーバのチャットで、$helloと投稿してみましょう
+botからHelloと返ってきたら成功です
+なんとこれだけでチャットを返してくれるbotが出来上がってしまいました!
+-->
 ## 試す
 
 bot を導入した Discord サーバで$hello と投稿してみましょう
@@ -249,7 +295,11 @@ Bot が Hello!と返してくれれば成功です
 ![height:350](./assets/cap.png)
 
 ---
-
+<!--
+今回は、on_messageでチャットが投稿されたことを検知しましたが、ほかにもさまざま
+なアクションをトリガーできます。一覧は.pyに乗ってますので、興味ありましたら
+覗いてみてください
+-->
 ## 何をトリガーにできるのか
 
 一覧は discord.py の API で紹介されています
@@ -257,7 +307,10 @@ https://discordpy.readthedocs.io/ja/latest/api.html
 ![height:400](./assets/api.png)
 
 ---
-
+<!--
+ちらっと中身解説しますが、ちょっとお時間ないので、多少省きながら行きます
+@client.eventのデコレータで、コルーチンの関数かを判定し、そうだった場合に、clientに変数として関数ごともたせます
+-->
 ## ちらっと中身解説
 
 ```python
@@ -273,7 +326,10 @@ async def on_message(message):
   - 対象の関数が**コルーチン関数**か判定し、コルーチンの場合は client にインスタンス変数として保持させます
 
 ---
-
+<!--
+on_messageで、discord側から常にアクションが届いているのですが、そのアクションがチャットの投稿だった時に動く関数を定義しています
+message.authorで、botが投稿したアクションにbotが反応しないようにします
+-->
 ## ちらっと中身解説
 
 ```python
@@ -292,7 +348,6 @@ async def on_message(message):
   - メッセージを発信した対象が bot 自身か判定(無限ループ防止)
 
 ---
-
 ## ちらっと中身解説
 
 ```python
@@ -307,7 +362,7 @@ client.run('Botトークン')
 
 ## まとめ
 
-- bot 開発は簡単に行える(ホントに敷居が低いです!)
+- bot 開発は簡単に行える(ホントに敷居が低いです:v:)
 - 世に出回っている BOT は安全ではない場合もあります
   - slackbot とか google エクステンションと同じですが...
 
