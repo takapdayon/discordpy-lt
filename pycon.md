@@ -12,7 +12,6 @@ style: |
 ---
 
 <!--![bg left:40% 80%](https://marp.app/assets/marp.svg)-->
-
 # **Discord ヘビーユーザによる**
 ## **discord.py 解説**
 
@@ -29,6 +28,15 @@ style: |
 
 ---
 
+## LT で持って帰ってもらいたいもの
+
+- bot の開発は簡単だよ!
+  - 余計な申請とかいらないよ!
+- bot を導入したサーバが豪華になるよ
+- 世の bot(slack とか)と同じように開発できるよ
+
+---
+
 ## アジェンダ
 
 <!--TODO きれいにする-->
@@ -40,15 +48,6 @@ style: |
     - トリガー紹介
   - discord.py の中身をちらっと覗き見
 - まとめ
-
----
-
-## LT で持って帰ってもらいたいもの
-
-- bot の開発は簡単だよ!
-  - 余計な申請とかいらないよ!
-- bot を導入したサーバが豪華になるよ
-- 世の bot(slack とか)と同じように開発できるよ
 
 ---
 
@@ -188,6 +187,46 @@ client.run('Botトークン')
 ```
 
 ---
+<!-- Scoped style -->
+<style scoped>
+section {
+  font-size:25px;
+}
+.highlighted-line {
+  background-color: #ff0;
+  display: block;
+  margin: 0 -16px;
+  padding: 0 16px;
+}
+</style>
+# 最小限のコード
+
+<!-- TODO ハイライトを見やすくする -->
+
+公式からサンプルで出されている最小限コードです
+https://discordpy.readthedocs.io/en/latest/quickstart.html
+
+```python {15-16,18}
+import discord
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$hello'):
+        await message.channel.send('Hello!')
+
+client.run('Botトークン')
+```
+
+---
 
 ## 動かしてみよう
 
@@ -208,21 +247,6 @@ bot を導入した Discord サーバで$hello と投稿してみましょう
 Bot が Hello!と返してくれれば成功です
 
 ![height:350](./assets/cap.png)
-
----
-
-## 他にちょっと関数を紹介
-
-- **on_member_join**: ユーザが join したことを検知する
-
-  - 使い道
-    - join したユーザに対して Bot から DM で説明を送る
-    - join した情報を外部 API に投げて連携する
-
-- **on_member_update**: ユーザのステータス変更を検知する
-  - 使い道
-    - ゲームアクティビティを取得し、各ゲーム時間を算出する
-    - (これ作りたい!)
 
 ---
 
@@ -297,101 +321,3 @@ client.run('Botトークン')
 
 ## You are the server customizer Champion!
 ## (ご清聴ありがとうございました!)
-
----
-
-## <!--
-
-### discord.py の中身をちらっと覗き見
-
-最小限のコードで async/await で定義している事からわかるように
-asyncio で動いています
-
-```
-client = discord.Client()
-```
-
-全ての元になる Client クラスをインスタンス化してます
-
-```
-@client.event
-```
-
-先ほどインスタンス化した client の event 凸れーたです
-
----
-
-## @client.event
-
-```python
-    def event(self, coro):
-        if not asyncio.iscoroutinefunction(coro):
-            raise TypeError('event registered must be a coroutine function')
-
-        setattr(self, coro.__name__, coro)
-        log.debug('%s has successfully been registered as an event', coro.__name__)
-        return coro
-```
-
-関数が**コルーチン**で定義されているかをチェックし
-よければインスタンス変数として関数を保持する感じです
-
----
-
-## client.run('your token here')
-
-```python
-def run(self, *args, **kwargs):
-    #~省略~
-    async def runner():
-        try:
-            await self.start(*args, **kwargs)
-        finally:
-            if not self.is_closed():
-                await self.close()
-```
-
-start の中で login と connect の処理が走ります
-やってることとしては、discord 側との認証を確保しています
-connect で discord 側からデータを受け取るクラスをインスタンス化しています
-
----
-
-## client.run('your token here')
-
-```python
-def run(self, *args, **kwargs):
-    #~省略~
-    def stop_loop_on_completion(f):
-        loop.stop()
-
-    future = asyncio.ensure_future(runner(), loop=loop)
-    future.add_done_callback(stop_loop_on_completion)
-    try:
-        loop.run_forever()
-    except KeyboardInterrupt:
-        log.info('Received signal to terminate bot and event loop.')
-    finally:
-        future.remove_done_callback(stop_loop_on_completion)
-        log.info('Cleaning up tasks.')
-        _cleanup_loop(loop)
-```
-
----
-
-## こんなの作りました
-
-自分が過去に作ったものを荒く紹介
-
-- ゲームのチーム分け
-
-  - ゲームの API からキャラクターを取得して、それぞれに割り振る
-
-- グローバルチャット
-
-  - 他のサーバのみんなと...チャットができちゃう!?
-
-- slack に join 通知を送る
-  - join したら、お知らせするようにしました b
-
--->
