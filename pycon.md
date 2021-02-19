@@ -236,8 +236,6 @@ awaitで、対象のサーバに対してsendの中身を返しています
 -->
 # Hello World!
 
-<!-- TODO ハイライトを見やすくする -->
-
 公式からサンプルで出されている最小限コードです
 https://discordpy.readthedocs.io/en/latest/quickstart.html
 
