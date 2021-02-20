@@ -358,12 +358,25 @@ client.run('Botトークン')
 
 ---
 
+<!-- _class: title -->
+<br>
+<br>
+<br>
+<br>
+<br>
+
 ## まとめ
 
-- bot 開発は簡単に行える(ホントに敷居が低いです:v:)
-- 世に出回っている BOT は安全ではない場合もあります
-  - slackbot とか google エクステンションと同じですが...
+---
 
+<!-- _class: title -->
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## :v:bot開発は簡単だよ!:v:
 ---
 
 <!-- _class: title -->
