@@ -133,11 +133,16 @@ bot開発は簡単だよ!
 ## その願い、**discord.py**で叶うかもしれません!
 
 ---
-
+<!--
+こちらのドキュメント、先ほどトークでもありましたスフィンクスで作られています
+ありがとうスフィンクスと言う感じですねー
+-->
 ## discord.py
 
 Discord API をラップして Python から使えるようにしたライブラリ
 中で Discord との認証等ごにょってくれているためとてもありがたい
+
+https://discordpy.readthedocs.io/ja/latest/index.html
 
 ---
 <!--
@@ -158,7 +163,7 @@ Discord API をラップして Python から使えるようにしたライブラ
 ## 1: discord bot を作成する
 
 discord.py で紹介されています
-https://discordpy.readthedocs.io/en/latest/discord.html
+https://discordpy.readthedocs.io/ja/latest/discord.html
 
 見てわかる通り、やることは凄く少ないです
 
